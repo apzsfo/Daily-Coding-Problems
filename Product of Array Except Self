@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int length = nums.size();
+        
+        int L[length];
+        int R[length];
+        vector<int>sol(length);
+        R[length-1] = nums[length-1];
+        L[0] = nums[0];
+        for(int i = 1;  i < length; i++){
+            L[i] = L[i-1]*nums[i];
+            R[length-i-1] = R[length-i]*nums[length-i-1];
+        }
+        sol[0] = R[1];
+        sol[length-1] = L[length-2];
+        for(int i = 1; i < length-1; i++){
+            sol[i] = L[i-1] * R[i+1];
+        }
+        return sol;
+    }
+};
