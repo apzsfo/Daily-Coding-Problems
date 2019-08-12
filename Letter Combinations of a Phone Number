@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<string> sol;
+    void backtrack(string combo, string rem, unordered_map<string, string>&nl){
+        if(rem.length() == 0)
+            sol.push_back(combo);
+        else{
+            string num = rem.substr(0,1);
+            string map = nl[num];
+            for(int i = 0; i < map.size(); i++){
+                backtrack(combo + map.substr(i,1), rem.substr(1, rem.size()-1), nl);
+            }
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        unordered_map<string, string>nl;
+        if(digits.size() == 0)
+            return {};
+        nl["2"]="abc";
+        nl["3"]="def";
+        nl["4"]="ghi";
+        nl["5"]="jkl";
+        nl["6"]="mno";
+        nl["7"]="pqrs";
+        nl["8"]="tuv";
+        nl["9"]="wxyz";
+        backtrack("", digits, nl);
+        return sol;
+    }
+};
+     
+
+        
